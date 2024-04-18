@@ -7,8 +7,8 @@ import { NextResponse } from "next/server";
 const credentialsConfig = CredentialsProvider({
   name: "Credentials",
   credentials: {
-    username: {
-      label: "User Name",
+    email: {
+      label: "email",
     },
     password: {
       label: "Password",
@@ -18,9 +18,9 @@ const credentialsConfig = CredentialsProvider({
   async authorize(credentials) {
     //write the logic for the login here
     if (credentials) {
-      const { username } = credentials;
+      const { email } = credentials;
       return {
-        name: `${username}`,
+        name: `${email}`,
       };
     } else {
       return null;
@@ -30,6 +30,9 @@ const credentialsConfig = CredentialsProvider({
 
 const config = {
   providers: [Google, credentialsConfig],
+  pages: {
+    signIn: "/login",
+  },
 } satisfies NextAuthConfig;
 
 export const {
